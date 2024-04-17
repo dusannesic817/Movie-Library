@@ -49,7 +49,7 @@ return [
             'password' => env('DB_PASSWORD', 'dusannesic123'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8'),
-            'collation' => env('DB_COLLATION', 'utf8_bin'),
+            'collation' => env('DB_COLLATION', 'utf8_slovenian_ci'),
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
