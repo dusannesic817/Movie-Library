@@ -30,7 +30,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                        @if ($currentLocale=='en')
+                        <span class="nav-link text-primary">EN</span>
+                        @else
+                        <a class="nav-link" href="{{ route('lang', ['locale'=>'en']) }}">EN</a>
+                        @endif
+                    
+                        </li>
+                        <li class="nav-item">
+                            @if ($currentLocale=='sr')
+                            <span class="nav-link text-primary">SR</span>
+                            @else
+                            <a class="nav-link" href="{{ route('lang', ['locale'=>'sr']) }}">SR</a>
+                            @endif
+                        
+                            </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

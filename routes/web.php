@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,6 +21,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+Route::get('/lang/{locale}', function (string $locale){
+    if(isset($locale)){
+        app()->setLocale($locale);
+    }
+   // App::setLocale($locale);
+
+    session(['locale' => $locale]);
+
+    return redirect()->back();
+})->whereIn('locale', ['en','sr'])->name('lang'); //ovo nema sluzi da stavimo ime rute
+
 require __DIR__.'/auth.php';
 
 Auth::routes([
@@ -30,4 +46,4 @@ Auth::routes([
 
 );
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
