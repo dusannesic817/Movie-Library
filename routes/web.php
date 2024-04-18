@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -19,6 +20,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/genre',[GenreController::class, 'index'])->name('genre.index');
+    Route::get('/genre/create',[GenreController::class, 'create'])->name('genre.create');
+    Route::post('/genre',[GenreController::class, 'store'])->name('genre.store');
+
+    Route::get('/genre/{genre}/edit', [GenreController::class, 'edit'])
+    ->name('genre.edit');
+
+    Route::put('/genre/{genre}', [GenreController::class, 'update'])
+    ->name('genre.update');
+    
+
 });
 
 

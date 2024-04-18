@@ -3,6 +3,15 @@
     "Email Address": "Email Adresa",
     "Password": "Lozinka",
     "Remember Me": "Zapamti me",
-    "You are logged in!": "Uspesno ste logovani!"
+    "You are logged in!": "Uspesno ste logovani!",
+    "Genres": "Zanrovi",
+    "Name En": "Naziv En",
+    "Name Sr": "Naziv Sr",
+    "Settings": "Administracija",
+    "Create": "Kreiraj",
+    "Add": "Dodaj",
+    "Submit" : "Potvrdi",
+    "Cancel": "Otkazi",
+    "Edit": "Izmeni"
 
 }

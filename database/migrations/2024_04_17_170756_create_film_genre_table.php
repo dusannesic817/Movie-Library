@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->foreign('genre_id', 'film_genre_genre_fk')->references('id')->on('genres')
             ->onUpdate('cascade')->onDelete('no action'); 
+            
         });
     }
 
