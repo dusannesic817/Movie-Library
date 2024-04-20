@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FilmController;
 use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,12 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/genre/{genre}', [GenreController::class, 'update'])
     ->name('genre.update');
+
+    Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])
+    ->name('genre.destroy');
+
+    Route::get('/film/{film}', [FilmController::class, 'show'])->name('film.show');
+
     
 
 });

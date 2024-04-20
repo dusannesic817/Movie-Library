@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\App;
 
 class GenreController extends Controller
 {
@@ -13,8 +14,18 @@ class GenreController extends Controller
      */
     public function index()
     {
+
+        $local=App::currentLocale();
+
+        if($local=='en'){
+            //$data = Genre::orderBy('name_en')->get();
+            $data = Genre::orderBy('name_en')->paginate(5);
+        }elseif($local=='sr'){
+            $data = Genre::orderBy('name_sr')->paginate(5);
+        }else{
+            $data = Genre::all();
+        }
         // all dobavlja sve podatke
-        $data = Genre::all();
         return view('genre.index', ['genres'=>$data]);
 
     }
@@ -37,7 +48,11 @@ class GenreController extends Controller
             'name_sr' => 'nullable|unique:genres,name_sr'
             ]);
          
-            Genre::create($request->all()); 
+            Genre::create($request->all());
+
+            $request->session()->flash('alertType','success');
+            $request->session()->flash('alertMsg','Successfully added');
+
             return redirect()->route('genre.index');
             
             
@@ -74,6 +89,10 @@ class GenreController extends Controller
 
             //ili $genre->update($request->all());
             $genre->update($form_filds);
+
+            $request->session()->flash('alertType','success');
+            $request->session()->flash('alertMsg','Successfully update');
+
             return redirect()->route('genre.index');
     }
 
@@ -82,6 +101,12 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        $genre->delete();
+        
+        session()->flash('alertType','success');
+        session()->flash('alertMsg','Successfully deleted');
+
+        return redirect()->route('genre.index');
+
     }
 }

@@ -12,6 +12,9 @@
     "Add": "Dodaj",
     "Submit" : "Potvrdi",
     "Cancel": "Otkazi",
-    "Edit": "Izmeni"
+    "Edit": "Izmeni",
+    "Successfully added": "Uspesno dodato",
+    "Successfully update": "Uspesno izmenjeno",
+    "Successfully deleted": "Uspesno obrisano"
 
 }

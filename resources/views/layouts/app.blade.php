@@ -47,6 +47,7 @@
                         
                             </li>
                     </ul>
+                    @auth
                     <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a id="navbarAdministracija" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -60,6 +61,7 @@
                         </div>
                     </li>
                     </ul>
+                    @endauth
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -100,8 +102,10 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
-            @yield('genre')
+            
+                                @yield('content')
+            
+         
         </main>
     </div>
 </body>
