@@ -16,51 +16,6 @@ class Film extends Model
     protected $fillable=['id','name','year','running_h','running_m','rating','image'];
 
 
-    public function scopeFilter($query, array $filters){
-      if($filters['search'] ?? false){
-         $query->where('name' , 'like', '%'. request('search'). '%');
-      }
-
-      if($filters['rating'] ?? false){
-         $query->where('rating' ,'>=', request('rating'));
-      }
-
-      if($filters['year_from'] ?? false){
-         $query->where('year' ,'>=', request('year_from'));
-      }
-
-      if($filters['year_to'] ?? false){
-         $query->where('year' ,'<=',  request('year_to'));
-      }
-
-      if ($filters['genre'] ?? false) {
-         $query->whereHas('genres', function ($query){
-             $query->where('id', request('genre'));
-         });
-     }
-
-     if ($filters['star'] ?? false) {
-     $query->whereHas('stars', function($query) {
-      $query->where('id', request('star'));
-       });
-
-      }  
-
-
-     
-
-
-       //  $query->where('genre' ,'<=', request('year_to'));
-      }
-
-
-    
-
-
-
-
-
-
     public function genres(): BelongsToMany {
         return $this->belongsToMany(Genre::class);
      }
@@ -84,17 +39,47 @@ class Film extends Model
                         ($this->runing_m ? ($this->runinig_m. " min") : "")),
 
         );
-        }
+      }
 
-        protected function imgSrc(): Attribute{
+      protected function imgSrc(): Attribute{
          return Attribute::make(
          get: fn () =>  ($this->image && Storage::disk('public')->exists($this->image))? 
             Storage::url($this->image): '/storage/film_images/default-movie.jpg'
          );
 
-         }
+      }
         
-
+      public function scopeFilter($query, array $filters){
+            if($filters['search'] ?? false){
+               $query->where('name' , 'like', '%'. request('search'). '%');
+            }
+      
+            if($filters['rating'] ?? false){
+               $query->where('rating' ,'>=', request('rating'));
+            }
+      
+            if($filters['year_from'] ?? false){
+               $query->where('year' ,'>=', request('year_from'));
+            }
+      
+            if($filters['year_to'] ?? false){
+               $query->where('year' ,'<=',  request('year_to'));
+            }
+      
+            if ($filters['genre'] ?? false) {
+               $query->whereHas('genres', function ($query){
+                   $query->where('id', request('genre'));
+               });
+           }
+      
+           if ($filters['star'] ?? false) {
+           $query->whereHas('stars', function($query) {
+            $query->where('id', request('star'));
+             });
+      
+            }  
+      
+      }
    
 
 }

@@ -39,12 +39,7 @@ class FilmController extends Controller
 
            // $rating= $request->rating;  // pokupio sam name="rating" iz inputa
            
-            $datas=Film::latest()->filter(
-                request(['search','rating','year_from', 'year_to','genre','star'])
-
-            )->paginate(5);
-
-        
+    
 
            /* $datas= Film::when($rating, function($query) use ($rating){   //ovo when bi menjalo if, npr if($rating){pa uslov} ako ne vrati $datas::Film->all() znaci proverava da li smo popunili formu za rating
                 $query->where('rating','>=', $rating);
@@ -93,6 +88,11 @@ class FilmController extends Controller
             $datas= Film::orderBy('name')->paginate(5);
             $populateData=[];
         }*/
+
+        $datas=Film::latest()->filter(
+            request(['search','rating','year_from', 'year_to','genre','star'])
+
+        )->paginate(5);
 
         $populateData= $request->all();
         $genres=Genre::all();
