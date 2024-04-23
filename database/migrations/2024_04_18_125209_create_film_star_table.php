@@ -18,7 +18,7 @@ return new class extends Migration
             $table->primary(['film_id','person_id'], 'film_person_pk');
 
             $table->foreign('film_id', 'film_star_film_id_fk')->references('id')->on('films')
-            ->onUpdate('no action')->onDelete('no action');
+            ->onUpdate('no action')->onDelete('cascade');
             $table->foreign('person_id', 'film_star_star_id_fk')->references('id')->on('people')
             ->onUpdate('no action')->onDelete('cascade');
         });

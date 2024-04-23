@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->smallInteger('year')->unsigned()->nullable(false);
-            $table->smallInteger('runing_h')->unsigned()->nullable(true);
-            $table->smallInteger('runing_m')->unsigned()->nullable(true);
+            $table->smallInteger('running_h')->unsigned()->nullable(true);
+            $table->smallInteger('running_m')->unsigned()->nullable(true);
             $table->decimal('rating', 3,1)->unsigned()->nullable(true);
 
 

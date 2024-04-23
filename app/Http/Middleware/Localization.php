@@ -13,17 +13,17 @@ class Localization
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-
-        if(Session::exists('locale')){    //proveravamo da li postoji kljuc sesija ta
-            App::setLocale(Session::get('locale'));   // i ovde je postavljamo locale sesiju pamtimo
-            
+        if(Session::exists('locale')) {
+            App::setLocale(Session::get('locale'));
         }
+
         return $next($request);
     }
-
-
 }
+

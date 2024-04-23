@@ -15,6 +15,9 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -62,6 +65,7 @@
                     </li>
                     </ul>
                     @endauth
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -102,10 +106,7 @@
         </nav>
 
         <main class="py-4">
-            
-                                @yield('content')
-            
-         
+            @yield('content')
         </main>
     </div>
 </body>

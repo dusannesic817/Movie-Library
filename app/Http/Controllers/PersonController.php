@@ -36,7 +36,7 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        //
+        
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Models\Film;
 use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
