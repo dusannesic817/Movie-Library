@@ -12,7 +12,86 @@
 	<div class="card">
 		<div class="card-header">{{ __('Search') . ": " . __('Film') }}</div>
 		<div class="card-body">
-			<form method="POST" action="{{ route('film.index') }}">
+
+
+			<form class="d-flex" action="{{ route('film.index') }}">
+				<div class="row">
+					
+						<div class="col-12 mb-3">
+							<input class="form-control me-2"
+							type="search"
+							name="search"
+							placeholder="Search" 
+							aria-label="Search">
+						</div>
+					</div>
+					<div class="col-2 mb-2">
+						
+						<select class="form-select @error('rating') is-invalid @enderror" name="rating">
+							<option value="">Rating</option>
+							<option value="10" @selected(old('rating', ($populateData['rating']??''))==10)>10</option>
+							@for ($i = 9; $i >= 1; $i--)
+								<option value="{{ $i }}" @selected(old('rating', ($populateData['rating']??''))==$i)>{{ $i }}+</option>
+							@endfor						
+						</select>
+						@error('rating')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+						@enderror
+					</div>
+					<div class="col-2 mb-2">
+						
+						<div class="input-group @error('year_from') is-invalid @enderror @error('year_to') is-invalid @enderror">
+							<input type="text" class="form-control" placeholder="Year from"  name="year_from" value="{{ old('year_from', ($populateData['year_from']??'')) }}">
+							<input type="text" class="form-control" placeholder="Year to"  name="year_to" value="{{ old('year_to', ($populateData['year_to']??'')) }}">
+						</div>
+
+						@error('year_from')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+						@error('year_to')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+					</div>
+					<div class="col-2 mb-2">
+    					<select class="form-select" name="genre">
+							<option value="">Genre</option>
+							@foreach ($genres as $genre)
+								<option value="{{ $genre->id }}" @selected(($populateData['genre']??'')==$genre->id)>{{ $genre->name }}</option>
+							@endforeach						
+						</select>
+					</div>
+					<div class="col-2 mb-2">
+						
+    					<select class="form-select" name="star">
+							<option value="">Star</option>
+							@foreach ($people as $p)
+								<option value="{{ $p->id }}" @selected(($populateData['star']??'')==$p->id)>{{ $p->full_name }}</option>
+							@endforeach						
+						</select>
+					</div>
+				</div>
+					<div class="row mb-4 float-end">
+						<div class="col-12">
+							<button type="submit" class="btn btn-success">
+								{{ __('Search') }}
+							</button>
+
+							<a class="btn btn-secondary" href="{{ route('film.index') }}">
+								{{ __('Cancel') }}
+							</a>
+						</div>
+					
+				
+			</form>
+
+
+			{{--<form method="POST" action="{{ route('film.index') }}">
 				@csrf
 				<div class="row">
 					<div class="col-3 mb-3">
@@ -105,7 +184,7 @@
 						</a>
 					</div>
 				</div>
-			</form>
+			</form>--}}
 		</div>
 	</div>
 </div>
@@ -180,7 +259,7 @@
 			@endforeach
 			</tbody>
 		</table>
-        {{ $datas->links() }}
+		{{ $datas->links() }}
 	</div>
 </div>
     </div>

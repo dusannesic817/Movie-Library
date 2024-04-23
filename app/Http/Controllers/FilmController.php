@@ -16,9 +16,9 @@ class FilmController extends Controller
     public function index(Request $request )
     {
 
-        if($request->isMethod('post')){    //stavio sam u post zbog forme i post rute pa tu se vrsi filtracija
+      /*  if($request->isMethod('post')){    //stavio sam u post zbog forme i post rute pa tu se vrsi filtracija
 
-            $rule=[
+           $rule=[
                 'rating' => 'nullable|integer|between:1,10',
                 'year_from' => 'nullable|date_format:Y|before_or_equal:today',
                 'year_to' => 'nullable|date_format:Y|before_or_equal:today',
@@ -34,19 +34,19 @@ class FilmController extends Controller
                 $rule['time_to'].='|gte:time_from';
             }
 
-            $request->validate($rule); 
+            $request->validate($rule); */
 
 
-            $rating= $request->rating;  // pokupio sam name="rating" iz inputa
-            $yearFrom= $request->year_from;
-            $yearTo= $request->year_to;
-            $timeFrom= $request->time_from;
-            $timeTo= $request->time_to;
-            $name= $request->name;
-            $genre= $request->genre;
-            $star= $request->star;
+           // $rating= $request->rating;  // pokupio sam name="rating" iz inputa
+           
+            $datas=Film::latest()->filter(
+                request(['search','rating','year_from', 'year_to','genre','star'])
 
-            $datas= Film::when($rating, function($query) use ($rating){   //ovo when bi menjalo if, npr if($rating){pa uslov} ako ne vrati $datas::Film->all() znaci proverava da li smo popunili formu za rating
+            )->paginate(5);
+
+        
+
+           /* $datas= Film::when($rating, function($query) use ($rating){   //ovo when bi menjalo if, npr if($rating){pa uslov} ako ne vrati $datas::Film->all() znaci proverava da li smo popunili formu za rating
                 $query->where('rating','>=', $rating);
             })
             ->when($yearFrom, function($query) use ($yearFrom){
@@ -86,24 +86,16 @@ class FilmController extends Controller
                 });
             })
 
-
-          
-            
-
-
-            
-            
-            ->get();
-
-            $populateData= $request->all();
-
+            ->get();*/
+          /*  
         }else{
           
             $datas= Film::orderBy('name')->paginate(5);
             $populateData=[];
-        }
+        }*/
 
-        $genres= Genre::all();
+        $populateData= $request->all();
+        $genres=Genre::all();
         $people= Person::all();
 
         return view('film.index',
@@ -114,9 +106,6 @@ class FilmController extends Controller
             'people'=>$people
             
         ]);
-
-       
-    
   
     }
 
@@ -271,5 +260,6 @@ class FilmController extends Controller
             session()->flash('alertMsg','Successfully deleted');
     
             return redirect()->route('film.index');
+
     }
 }

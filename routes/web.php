@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])
     ->name('genre.destroy');
 
-    Route::post('/film', [FilmController::class, 'index'])->name('film.index');
+   // Route::post('/film', [FilmController::class, 'index'])->name('film.index');
 
     Route::resource('film', FilmController::class);
    
