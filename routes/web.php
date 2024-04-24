@@ -13,9 +13,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');  //da mora da bude logovan i da bude verifikovan
+})->middleware(['auth', 'verified'])->name('dashboard');  *///da mora da bude logovan i da bude verifikovan
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,13 +37,16 @@ Route::middleware('auth')->group(function () {
 
    // Route::post('/film', [FilmController::class, 'index'])->name('film.index');
 
-    Route::resource('film', FilmController::class);
+   
    
     
-
+    Route::get('/admin', function(){
+        return view ('admin.index');
+    });
     
 
 });
+Route::resource('film', FilmController::class)->middleware(['auth','admin']);
 
 
 Route::get('/lang/{locale}', function (string $locale){
@@ -70,4 +73,4 @@ Auth::routes([
 
 );
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home');

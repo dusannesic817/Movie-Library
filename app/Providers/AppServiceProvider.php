@@ -25,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('currentLocale', App::currentLocale());
         });
 
+        
+
         Paginator::useBootstrapFive(); 
 
     }

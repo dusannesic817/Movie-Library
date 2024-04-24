@@ -15,8 +15,15 @@ return Application::configure(basePath: dirname(__DIR__))
 
             App\Http\Middleware\Localization::class,
         ]);
+
+        $middleware->alias([
+            'admin' => App\Http\Middleware\Admin::class,
+        ]);
         
     })
+    
+
+
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
