@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\FilmController;
-use App\Http\Controllers\GenreController;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FilmController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\ProfileController;
 
 
 Route::get('/', function () {
@@ -36,17 +37,17 @@ Route::middleware('auth')->group(function () {
     ->name('genre.destroy');
 
    // Route::post('/film', [FilmController::class, 'index'])->name('film.index');
-
-   
-   
-    
-    Route::get('/admin', function(){
-        return view ('admin.index');
-    });
     
 
 });
-Route::resource('film', FilmController::class)->middleware(['auth','admin']);
+
+Route::middleware(['auth', 'admin'])->group(function(){
+    Route::resource('film', FilmController::class);
+    Route::resource('person', PersonController::class);
+   
+
+});
+//Route::resource('film', FilmController::class)->middleware(['auth','admin']);
 
 
 Route::get('/lang/{locale}', function (string $locale){

@@ -13,7 +13,6 @@
           <div class="card">
               <div class="card-header">{{ __('Genres'). " ". __("Add") }}</div>
              
-
               <div class="card-body">
 
               <form method="POST" action="{{route('genre.store')}}">

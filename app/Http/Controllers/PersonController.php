@@ -12,7 +12,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -20,7 +20,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        //
+        return view('person.create');
     }
 
     /**

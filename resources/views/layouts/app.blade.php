@@ -12,9 +12,12 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+
 
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -22,7 +25,10 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+           
+            
             <div class="container">
+               
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -31,6 +37,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
@@ -49,7 +56,15 @@
                             @endif
                         
                             </li>
+                           
                     </ul>
+                   
+                    <div class="mt-2">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                       
+                      </form>
+                    </div>
                     @auth
                     <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
@@ -65,6 +80,8 @@
                     </li>
                     </ul>
                     @endauth
+                   
+                      
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -86,7 +103,7 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-                                
+                            
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -98,8 +115,14 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    <a class="dropdown-item" href="{{ route('genre.index') }}">
+                                        {{ __('Genres') }}
+                                    </a>
                                 </div>
                             </li>
+                            
+                   
+                         
                         @endguest
                     </ul>
                 </div>
