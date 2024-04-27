@@ -132,6 +132,7 @@ class FilmController extends Controller
     {
       $request->validate(
             [
+                
                 'name'=>'required',
                 'running_h'=> 'nullable|numeric|min:1|integer',
                 'running_m'=> 'nullable|numeric|between:1,59|integer',

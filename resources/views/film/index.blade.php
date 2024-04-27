@@ -12,8 +12,6 @@
 	<div class="card">
 		<div class="card-header">{{ __('Search') . ": " . __('Film') }}</div>
 		<div class="card-body">
-
-
 			<form class="d-flex" action="{{ route('film.index') }}">
 				<div class="row">
 					
@@ -25,8 +23,7 @@
 							aria-label="Search">
 						</div>
 					</div>
-					<div class="col-2 mb-2">
-						
+					<div class="col-2 mb-2" style="margin-left:30px;">
 						<select class="form-select @error('rating') is-invalid @enderror" name="rating">
 							<option value="">Rating</option>
 							<option value="10" @selected(old('rating', ($populateData['rating']??''))==10)>10</option>
@@ -40,7 +37,7 @@
 							</span>
 						@enderror
 					</div>
-					<div class="col-2 mb-2">
+					<div class="col-2 mb-2" style="margin-left:30px;">
 						
 						<div class="input-group @error('year_from') is-invalid @enderror @error('year_to') is-invalid @enderror">
 							<input type="text" class="form-control" placeholder="Year from"  name="year_from" value="{{ old('year_from', ($populateData['year_from']??'')) }}">
@@ -58,7 +55,7 @@
                             </span>
                         @enderror
 					</div>
-					<div class="col-2 mb-2">
+					<div class="col-2 mb-2" style="margin-left:30px;">
     					<select class="form-select" name="genre">
 							<option value="">Genre</option>
 							@foreach ($genres as $genre)
@@ -66,9 +63,9 @@
 							@endforeach						
 						</select>
 					</div>
-					<div class="col-2 mb-2">
+					<div class="col-2 mb-2" style="margin-left:30px;">
 						
-    					<select class="form-select" name="star">
+    					<select class="form-select" name="star" >
 							<option value="">Star</option>
 							@foreach ($people as $p)
 								<option value="{{ $p->id }}" @selected(($populateData['star']??'')==$p->id)>{{ $p->full_name }}</option>
@@ -76,12 +73,11 @@
 						</select>
 					</div>
 				</div>
-					<div class="row mb-4 float-end">
-						<div class="col-12">
-							<button type="submit" class="btn btn-success">
+					<div class="row mb-2">
+						<div class="col-6 float-end">
+							<button type="submit" class="btn btn-primary">
 								{{ __('Search') }}
 							</button>
-
 							<a class="btn btn-secondary" href="{{ route('film.index') }}">
 								{{ __('Cancel') }}
 							</a>

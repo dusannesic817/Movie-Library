@@ -23,22 +23,27 @@
                         id="name"
                         name="name"
                         value="{{old('name')}}"
-                        >
-                     {{-- @error('name_en')
+                        />
+                     @error('name')
                        <span class="invalid-feedback" role="alert">
                             <strong>{{$message}}</strong>
-                       </span>--}}
+                       </span>
+                      @enderror
+                       
+                    </div>
                        <div class="mb-3 mt-3">
-                        <label for="sruname" class="form-label">{{ __("Surname") }}</label>
+                        <label for="surname" class="form-label">{{ __("Surname") }}</label>
                         <input type="text" class="form-control" 
-                        id="sruname"
+                        id="surname"
                         name="surname"
-                        value="{{old('sruname')}}"
-                        >
-                     {{-- @error('name_en')
+                        value="{{old('surname')}}"
+                        />
+                     @error('surname')
                        <span class="invalid-feedback" role="alert">
                             <strong>{{$message}}</strong>
-                       </span>--}}
+                       </span>
+                      @enderror
+                       </div>
 
                        <div class="mb-3 mt-3">
                         <label for="b_date" class="form-label">{{ __("Date") }}</label>
@@ -46,11 +51,22 @@
                         id="b_date"
                         name="b_date"
                         value="{{old('b_date')}}"
-                        >
-                     {{-- @error('name_en')
-                       <span class="invalid-feedback" role="alert">
-                            <strong>{{$message}}</strong>
-                       </span>--}}
+                        />
+                      @error('b_date')
+                        <span class="invalid-feedback" role="alert">
+                              <strong>{{$message}}</strong>
+                        </span>
+                       @enderror
+                       
+                       </div>
+                       <div class="mb-3 row">
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-primary">{{ __("Submit") }}</button>
+                            <a href="{{ route('person.index') }}" class="btn btn-secondary">{{ __("Cancel") }}</a>
+                        </div>
+                        
+
+                      </div>
                 </form>
               </div>
           </div>
@@ -60,8 +76,3 @@
 
 @endsection
 
-<script>
-$(function(){
-    $('#datepicker').datepicker();
-  });
-</script>

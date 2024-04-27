@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use Exception;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -12,7 +13,10 @@ class PersonController extends Controller
      */
     public function index()
     {
-        
+        $data= Person::orderBy('name')->paginate(5);
+
+
+        return view('person.index' ,  ['person'=>$data]);
     }
 
     /**
@@ -28,7 +32,22 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+
+            'name'=>'required',
+            'surname'=>'required',
+            'b_date'=>'nullable|date',
+
+        ]);
+
+
+        Person::create($request->all());
+
+        $request->session()->flash('alertType','success');
+        $request->session()->flash('alertMsg','Successfully added');
+
+        return redirect()->route('person.index');
     }
 
     /**
@@ -44,7 +63,7 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        //
+        return view('person.edit',['person'=>$person]);
     }
 
     /**
@@ -52,7 +71,21 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        //
+        $request->validate([
+
+            'name'=>'required',
+            'surname'=>'required',
+            'b_date'=>'nullable|date',
+
+        ]);
+
+
+        $person->update($request->all());
+
+        $request->session()->flash('alertType','success');
+        $request->session()->flash('alertMsg','Successfully update');
+
+        return redirect()->route('person.index');
     }
 
     /**
@@ -60,6 +93,21 @@ class PersonController extends Controller
      */
     public function destroy(Person $person)
     {
-        //
+
+        try{
+            $person->delete();
+        
+            session()->flash('alertType','success');
+            session()->flash('alertMsg','Successfully deleted');
+    
+            return redirect()->route('person.index');
+        }catch(Exception $e){
+
+            session()->flash('alertType','danger');
+            session()->flash('alertMsg','Cannot be deleted');
+
+            return redirect()->route('person.index');
+        }
+       
     }
 }

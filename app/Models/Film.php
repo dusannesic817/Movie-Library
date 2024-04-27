@@ -35,8 +35,8 @@ class Film extends Model
 
      protected function runningTime(): Attribute{
         return Attribute::make(
-        get: fn () => trim(($this->runing_h ? ($this->runinig_h. " h"): "").
-                        ($this->runing_m ? ($this->runinig_m. " min") : "")),
+        get: fn () => trim(($this->running_h ? ($this->running_h. " h"): "").
+                        ($this->running_m ? ($this->running_m. " min") : "")),
 
         );
       }

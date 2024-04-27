@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('films', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
-            $table->smallInteger('year')->unsigned()->nullable(false);
-            $table->smallInteger('running_h')->unsigned()->nullable(true);
-            $table->smallInteger('running_m')->unsigned()->nullable(true);
-            $table->decimal('rating', 3,1)->unsigned()->nullable(true);
+            $table->string('surname')->nullable(false);
+            $table->string('id_number')->nullable(false)->unique();            
+            $table->string('city');
+            $table->string('address');
+            $table->date('b_date');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('films');
+        Schema::dropIfExists('members');
     }
 };
