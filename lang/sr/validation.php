@@ -126,6 +126,7 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+            'under-age'=>'Korisnik mora biti striji od 18 godina.'
         ],
     ],
 

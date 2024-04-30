@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Genre;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,11 @@ class Film extends Model
 
      public function directors(): BelongsToMany {
         return $this->belongsToMany(Person::class, 'film_director'); // ovde sam naveo 'film_director' jer on po defaultu misli da je meni n:m tabela film_person  kao sto gore odmah ucitama jer se i tako zove tabla film_genre
+     }
+
+     public function copy():HasOne{
+      return $this->hasOne(Copy::class);
+
      }
 
 

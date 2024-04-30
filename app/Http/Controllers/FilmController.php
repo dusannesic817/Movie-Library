@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Copy;
 use App\Models\Film;
 use App\Models\Genre;
 use App\Models\Person;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -132,7 +134,7 @@ class FilmController extends Controller
     {
       $request->validate(
             [
-                
+
                 'name'=>'required',
                 'running_h'=> 'nullable|numeric|min:1|integer',
                 'running_m'=> 'nullable|numeric|between:1,59|integer',
@@ -162,6 +164,12 @@ class FilmController extends Controller
             $film->image = $path;
             $film->save();
         }
+
+        $copy= new Copy();
+        $copy->film_id = $film->id;
+        $copy->code = Str::uuid();
+        $copy->save();
+        
         
 
         return redirect()->route('film.show',['film'=>$film]);  // salje na taj napravljeni film

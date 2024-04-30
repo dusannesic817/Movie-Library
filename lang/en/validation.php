@@ -174,6 +174,7 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+            'under-age'=>'Member must be over 18'
         ],
     ],
 

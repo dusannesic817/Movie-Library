@@ -19,6 +19,7 @@
                   <form method="POST" action="{{route('person.update',[$person->id])}}">
                         @method("PUT")
                         @csrf
+                        
                       <div class="mb-3">
                           <label for="name" class="form-label">{{ __("Name") }}</label>
                           <input type="text" class="form-control" 

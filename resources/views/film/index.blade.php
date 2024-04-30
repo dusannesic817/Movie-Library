@@ -1,4 +1,6 @@
-@include('layouts.app')
+@extends('admin.index')
+
+@section('content')
 
 <div class="container">
 <div class="row justify-content-center">
@@ -10,8 +12,17 @@
     </div>
     @endif
 	<div class="card">
-		<div class="card-header">{{ __('Search') . ": " . __('Film') }}</div>
-		<div class="card-body">
+		<a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+		<div class="d-flex justify-content-between">
+			<div class="card-header" >{{ __('Filter') . ": " . __('Film') }}	
+		</div>
+		<div>
+    		<i class="bi bi-three-dots"></i>	
+		</div>
+		</div>
+	</a>
+			<div class="collapse" id="collapseExample">
+				<div class=" mt-3">
 			<form class="d-flex" action="{{ route('film.index') }}">
 				<div class="row">
 					
@@ -73,20 +84,22 @@
 						</select>
 					</div>
 				</div>
-					<div class="row mb-2">
-						<div class="col-6 float-end">
-							<button type="submit" class="btn btn-primary">
-								{{ __('Search') }}
-							</button>
-							<a class="btn btn-secondary" href="{{ route('film.index') }}">
+				<div class="row mb-3" style="margin-right: 30px; ">
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button class="btn btn-primary me-md-2" type="submit">{{ __('Search') }}</button>
+					<a class="btn btn-secondary" href="{{ route('film.index') }}">
 								{{ __('Cancel') }}
 							</a>
-						</div>	
-					</div>			
+				  </div>
+				</div>
+
 			</form>
 		</div>
 	</div>
 </div>
+</div>
+</div>
+
 <div class="col-12">
 	<div class="row mb-2">
 		<div class="col-12">
@@ -101,20 +114,27 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>{{ __('Image') }}</th>
-					<th>{{ __('Name') }}</th>
-					<th>{{ __('Running time') }}</th>
-					<th>{{ __('Year') }}</th>
-					<th>{{ __('Rating') }}</th>
-					<th>{{ __('Genres') }}</th>
-					<th>#</th>
+					<th style="font-family: 'Poppins', sans-serif;
+					color: #012970;">{{ __('Image') }}</th>
+					<th  style="font-family: 'Poppins', sans-serif;
+					color: #012970;">{{ __('Name') }}</th>
+					<th  style="font-family: 'Poppins', sans-serif;
+					color: #012970;">{{ __('Running time') }}</th>
+					<th  style="font-family: 'Poppins', sans-serif;
+					color: #012970;">{{ __('Year') }}</th>
+					<th  style="font-family: 'Poppins', sans-serif;
+					color: #012970;">{{ __('Rating') }}</th>
+					<th  style="font-family: 'Poppins', sans-serif;
+					color: #012970;">{{ __('Genres') }}</th>
+					<th  style="font-family: 'Poppins', sans-serif;
+					color: #012970;">#</th>
 				</tr>
 			</thead>
 			<tbody>
 			@foreach ($datas as $film)
 				<tr>
 					<th scope="row">{{ $loop->iteration }}</th>
-					<td><img src="{{ $film->imgSrc }}" alt="{{ $film->name }}" class="mb-2" style="width: 100px;" /></td>
+					<td style="text-align: center;"><img src="{{ $film->imgSrc }}" alt="{{ $film->name }}" class="mb-2" style="width: 100px;" /></td>
 					<td><a href="{{route('film.show',$film)}}" >{{ $film->name }}</a>
 					
 						<p class="m-0"><strong>{{ __('Directors')}}:</strong>
@@ -123,17 +143,20 @@
 						@endforeach	
 						</p>
 
-						<p class="m-0"><strong>{{ __('Writers')}}:</strong>	
+						<span class="m-0"><strong>{{ __('Writers')}}:</strong>	
 						@foreach($film->writers as $p)
 							{{  $p->full_name}}
 						@endforeach		
-						</p>
+						</span>
 
-						<p class="m-0"><strong>{{ __('Stars')}}:</strong>	
-						@foreach($film->stars as $p)
-							{{  $p->full_name}}
-						@endforeach			
-						</p>
+						<div class='d-flex flex-row bd-highlight mb-3'>
+							<strong>{{ __('Stars')}}:</strong>
+							<div style="color:#aab7cf;">
+							@foreach($film->stars as $p)
+								{{$p->full_name}}
+							@endforeach	
+							</div>			
+						</div>
 				
 					</td>
 					<td>{{ $film->running_time }}</td>
@@ -141,7 +164,7 @@
 					<td>{{ $film->rating }}</td>
 					<td>
 						@foreach($film->genres as $g)
-							{{  $g->name}}
+							<p>{{$g->name}}</p>
 						@endforeach
 					</td>
 					<td>
@@ -163,3 +186,4 @@
 </div>
     </div>
 </div>
+@endsection
