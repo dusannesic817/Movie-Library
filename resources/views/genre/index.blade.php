@@ -9,12 +9,12 @@
       <div class="col-md-8">
 
 
-        @if(session('alertMsg'))
+    
           <x-message 
           type="{{session('alertType')}}"
           message=" {{ __(session('alertMsg')) }}"
           />
-        @endif
+
       
         <div class="row mb-3">
             <a href="/genre/create" class="btn btn-primary">

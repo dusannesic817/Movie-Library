@@ -6,13 +6,11 @@
 	<div class="row">
 		<div class="row justify-content-center">
 			<div class="row mb-2">
-
-    @if(session('alertMsg'))
 		<x-message 
 		type="{{session('alertType')}}"
 		message="{{ __(session('alertMsg')) }}"
 		/>
-    @endif
+
 	<div class="card">
 		<a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 		<div class="d-flex justify-content-between">

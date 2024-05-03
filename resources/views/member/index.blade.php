@@ -5,12 +5,12 @@
 <div class="container">
   <div class="row justify-content-center">
       <div class="col-md-8">
-        @if(session('alertMsg'))
+        
           <x-message 
           type="{{session('alertType')}}"
           message="{{ __(session('alertMsg')) }}"
           />
-        @endif
+     
         <div class="row mb-3">
             <a href="{{route('member.create')}}" class="btn btn-primary">
                 {{ __('Create') }}
