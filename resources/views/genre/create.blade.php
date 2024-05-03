@@ -3,15 +3,7 @@
 @section('content')
     
 
-<div class="container">
-  <div class="row justify-content-center">
-      <div class="col-md-8">
-          @if(session('alertMsg'))
-          <div class="alert alert-{{session('alertType')}} alert-dismissible fade show" role="alert">
-            {{ __(session('alertMsg')) }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          @endif
+<x-container>
           <div class="card">
               <div class="card-header">{{ __('Genres'). " ". __("Add") }}</div>
               <div class="card-body">
@@ -57,9 +49,7 @@
                   
               </div>
           </div>
-      </div>
-  </div>  
-</div>
+        </x-container>
         
 @endsection
 

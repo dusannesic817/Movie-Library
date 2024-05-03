@@ -3,9 +3,7 @@
 @section('content')
     
 
-<div class="container">
-<div class="row justify-content-center">
-<div class="col-md-8">
+<x-container>
     <div class="card">
         <div class="card-header">{{ __('Add') . ": " . __('Film') }}</div>
         <div class="card-body">
@@ -191,9 +189,7 @@
             </form>
         </div>
     </div>
-</div>
-</div>
-</div>
+</x-container>
 
 <script type="text/javascript">
 	$(document).ready(function(){

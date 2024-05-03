@@ -2,9 +2,7 @@
 
 
 @section('content')
-<div class="container">
-  <div class="row justify-content-center">
-      <div class="col-md-8">
+<x-container>
         
           <x-message 
           type="{{session('alertType')}}"
@@ -58,7 +56,5 @@
 
               </div>
           </div>
-      </div>
-  </div>
-</div>
+        </x-container>
 @endsection

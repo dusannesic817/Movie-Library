@@ -6,6 +6,7 @@
 	<div class="row">
 		<div class="row justify-content-center">
 			<div class="row mb-2">
+
 		<x-message 
 		type="{{session('alertType')}}"
 		message="{{ __(session('alertMsg')) }}"
@@ -25,7 +26,7 @@
 				<div class=" mt-3">
 			<form class="d-flex" action="{{ route('film.index') }}">
 				<div class="row">
-					
+				
 						<div class="col-12 mb-3">
 							<input class="form-control me-2"
 							type="search"
