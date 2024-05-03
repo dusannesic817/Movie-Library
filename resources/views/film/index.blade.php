@@ -1,15 +1,17 @@
-@extends('admin.index')
+@extends('layouts.app')
 
 @section('content')
 
 <div class="container">
-<div class="row justify-content-center">
-<div class="row mb-2">
+	<div class="row">
+		<div class="row justify-content-center">
+			<div class="row mb-2">
+
     @if(session('alertMsg'))
-    <div class="alert alert-{{session('alertType')}} alert-dismissible fade show" role="alert">
-      {{ __(session('alertMsg')) }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+		<x-message 
+		type="{{session('alertType')}}"
+		message="{{ __(session('alertMsg')) }}"
+		/>
     @endif
 	<div class="card">
 		<a class="btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -185,5 +187,7 @@
 	</div>
 </div>
     </div>
+	
 </div>
+
 @endsection

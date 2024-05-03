@@ -7,6 +7,8 @@ use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+
 
 class GenreController extends Controller
 {

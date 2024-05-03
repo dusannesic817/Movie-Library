@@ -1,14 +1,20 @@
-@include('layouts.app')
+@extends('layouts.app')
+
+
+@section('content')
+    
 
 <div class="container">
   <div class="row justify-content-center">
       <div class="col-md-8">
-          @if(session('alertMsg'))
-          <div class="alert alert-{{session('alertType')}} alert-dismissible fade show" role="alert">
-            {{ __(session('alertMsg')) }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          @endif
+
+
+        @if(session('alertMsg'))
+          <x-message 
+          type="{{session('alertType')}}"
+          message=" {{ __(session('alertMsg')) }}"
+          />
+        @endif
       
         <div class="row mb-3">
             <a href="/genre/create" class="btn btn-primary">
@@ -61,7 +67,7 @@
   </div>
 </div>
 
-
+@endsection
 
 
 
