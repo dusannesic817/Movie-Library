@@ -9,8 +9,8 @@ use Illuminate\View\Component;
 class Message extends Component
 {
   
-    protected $type;
-    protected $message;
+    public $type;
+    public $message;
     public function __construct($type,$message)
     {
         $this->type=$type;

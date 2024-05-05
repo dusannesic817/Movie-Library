@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('copies', function (Blueprint $table) {
-            $table->dropColumn('status'); 
-            $table->enum('status', ['Available', 'Unavailable', 'Unknown'])->default('Unknown');
+           
+            $table->enum('status', ['Available', 'Unavailable', 'Unknown'])->default('Unknown')->after('code');
         });
     }
-
 
     /**
      * Reverse the migrations.

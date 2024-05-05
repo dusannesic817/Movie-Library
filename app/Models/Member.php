@@ -13,6 +13,7 @@ class Member extends Model
     protected $fillable=['name','surname','id_number','city','address','b_date'];
 
     protected function fullName(): Attribute{ 
+        
         $fullName = $this->name . " " . $this->surname ;
          return Attribute::make(
          get: fn () => ($fullName),

@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CopyController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 
@@ -25,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/genre',[GenreController::class, 'index'])->name('genre.index');
+
     Route::get('/genre/create',[GenreController::class, 'create'])->name('genre.create');
     Route::post('/genre',[GenreController::class, 'store'])->name('genre.store');
 
@@ -46,6 +49,18 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::resource('film', FilmController::class);
     Route::resource('person', PersonController::class);
     Route::resource('member', MemberController::class);
+    Route::resource('copy', CopyController::class);
+    Route::resource('order', OrderController::class);
+
+
+    /*
+    Route::get(/order/create, [OrderController::class, create])->name('order.create');
+    Route::post(/order, [OrderController::class, store])->name('order.store');
+    */ 
+
+    /*
+    Route::resource('/copy/create', [CopyController::class, 'create']->name('copy/create');
+    */ 
    
 
 });

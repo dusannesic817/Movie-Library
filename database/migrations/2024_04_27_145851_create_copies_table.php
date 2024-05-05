@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('film_id');
             $table->uuid('code')->unique();
-            $table->boolean('status')->default(0);
             $table->integer('amount');
             $table->decimal('price', 4,2);
             $table->timestamps();
@@ -28,6 +27,7 @@ return new class extends Migration
 
             
         });
+
 
         }
 

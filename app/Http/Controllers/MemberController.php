@@ -47,10 +47,11 @@ class MemberController extends Controller
 
         ]);
 
-        Member::create($request->all());
+        $member=Member::create($request->all());
+        $new_member=$member->id;
 
         $request->session()->flash('alertType','success');
-        $request->session()->flash('alertMsg','Successfully added');
+        $request->session()->flash('alertMsg','Successfully added ID. '.$new_member);
 
         return redirect()->route('member.index');
     }

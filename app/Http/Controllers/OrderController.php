@@ -13,6 +13,7 @@ class OrderController extends Controller
     public function index()
     {
         //
+        
     }
 
     /**
@@ -20,7 +21,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('order.create');
     }
 
     /**

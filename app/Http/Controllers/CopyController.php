@@ -12,15 +12,21 @@ class CopyController extends Controller
      */
     public function index()
     {
-        //
+        
+        
+
+        $data = Copy::leftJoin('films', 'copies.film_id', '=', 'films.id')
+        ->select('copies.*')
+        ->orderBy('films.name')
+        ->paginate(5);
+    
+        return view('copy.index', ['copy'=>$data]);
+      
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('copy.create');
     }
 
     /**
@@ -31,12 +37,11 @@ class CopyController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(Copy $copy)
     {
-        //
+        return view('copy.show', [
+            'copy'=>$copy]);
     }
 
     /**
@@ -44,7 +49,8 @@ class CopyController extends Controller
      */
     public function edit(Copy $copy)
     {
-        //
+        return view ('copy.edit',[
+            'copy'=>$copy]);
     }
 
     /**
@@ -52,7 +58,22 @@ class CopyController extends Controller
      */
     public function update(Request $request, Copy $copy)
     {
-        //
+
+      
+
+    
+  
+
+   
+
+
+        $request->validate([
+            'amount'=>'required',
+            'price'=>'required|numeric|between:0,999999.99',
+            'status' => 'required'
+        ]);
+
+        $copy->update($request->all());
     }
 
     /**
