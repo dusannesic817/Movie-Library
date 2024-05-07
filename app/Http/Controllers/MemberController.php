@@ -43,6 +43,7 @@ class MemberController extends Controller
                     if ($age < 18) {
                         $fail('Korisnik je maloletan.');
                     }
+                    
                 },]
 
         ]);

@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
         Schema::table('orders', function (Blueprint $table) {
-            $table->boolean('status')->default(1)->after('to_date'); //status da stsavim da li je i dalje aktivna, tj da li i dalje duguje film ako ne stasvim na neaktvino
-          
+            //$table->boolean('status')->default(1)->after('to_date'); //status da stsavim da li je i dalje aktivna, tj da li i dalje duguje film ako ne stasvim na neaktvino
+            $table->dropColumn('to_date');
+            
+
+        });
+
+        Schema::table('orders', function (Blueprint $table) {
+            
+            $table->date('to_date')->after('created_at');
+            
+
         });
     }
 

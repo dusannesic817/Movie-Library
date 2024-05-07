@@ -6,6 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Member'). " ". __("Edit") }}</div>
                 <div class="card-body">
+                
                   <form method="POST" action="{{route('member.update',[$member->id])}}">
                     @method("PUT")
                         @csrf

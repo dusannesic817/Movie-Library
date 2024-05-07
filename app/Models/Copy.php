@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Copy extends Model
 {
@@ -14,20 +15,16 @@ class Copy extends Model
 
     protected $fillable=['status','amount','price'];
 
+     public function member(){
+        return $this->belongsToMany(Member::class,'orders');
+     }
 
-    public function film():BelongsTo{
+     public function film():BelongsTo{
         return $this->belongsTo(Film::class);
     }
 
-   /* protected function statuus(): Attribute{ 
-
-            if($this->status == 0){
-                $name= "Unavailable";
-            }elseif($this->status==1){
-                $name= "Available";
-            }
-         return Attribute::make(
-         get: fn () => ($name),
-         );
-     }*/
+    /* public function orders() {
+        return $this->belongsToMany(Order::class);
+    }*/
+     
 }

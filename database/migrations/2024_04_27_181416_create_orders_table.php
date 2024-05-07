@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('copy_id');
             $table->unsignedBigInteger('member_id');
             $table->integer('quantity');
-            $table->date('created_at')->nullable(false);
+            $table->timestamps();
             $table->date("to_date")->nullable(false);
 
             $table->foreign('copy_id', 'oreders_copy_id_fk')->references('id')->on('copies')

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Copy;
+use App\Models\Film;
 use App\Models\Order;
+use App\Models\Member;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,24 +15,98 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+      /*  $orders = Order::leftJoin('members', 'orders.member_id', '=', 'members.id')
+                    ->leftJoin('copies', 'orders.copy_id', '=', 'copies.id')
+                    ->select('orders.*', 'members.*', 'copies.*')
+                    ->get();*/
+     
+      // $orders = Order::with('member','copy')->toSql();
+      
+        $orders=Order::all();
+        dd($orders);
+        exit();
+        $member=Member::all();
+        $copy=Copy::all();
+
+        return view('order.index', [
+            "orders"=>$orders,
+            'member'=>$member,
+            'copy'=>$copy
+        ]);
         
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Copy $copy)
     {
-        return view('order.create');
+        $member=Member::all();
+        $film=Film::all();
+
+        session(['copy_id' => $copy->id]);
+
+        return view('order.create',[
+            'copy'=>$copy,
+            'film'=>$film
+
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+ 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_number'=>'required|exists:members,id_number|between:12,13',
+            'quantity'=>'required|numeric',
+            'created_at'=>'required',
+            'to_date'=>'required',
+
+        ]);
+
+        $copy_id=session('copy_id');
+        $copy = Copy::findOrFail($copy_id);
+        $order_quantity = $request->input('quantity');
+       
+
+        $id_number = $request->input('id_number');
+        $member_id = Member::where('id_number', $id_number)->value('id'); // dobijam samo taj jeda id, ne kolekciju kao sa get
+      
+        if($order_quantity <= $copy->amount && $copy->amount > 0 && $copy->status=="Available"){
+            
+            $copy->update(['amount'=>$copy->amount - $order_quantity]);
+
+            Order::create([
+                'copy_id' => $copy_id,
+                'member_id' => $member_id,
+                'quantity' => $request->input('quantity'),
+                'created_at' => $request->input('created_at'),
+                'to_date' => $request->input('to_date'),
+            ]);
+
+            if($request->session()->has('copy_id')) {
+                $request->session()->forget('copy_id');
+            }
+        
+
+            $request->session()->flash('alertType','success');
+            $request->session()->flash('alertMsg','Successfull Order.');
+        }else{
+
+        $alertMsg='';
+
+            if($order_quantity > $copy->amount && $copy->amount <= 0 ){
+                $alertMsg="Unavailable amount";
+            }elseif($copy->status !="Available"){
+                $alertMsg="Film is unavailable";
+            }
+
+            $request->session()->flash('alertType','danger');
+            $request->session()->flash('alertMsg', $alertMsg);
+
+        }
+
+        return redirect()->route('film.index');
     }
 
     /**
@@ -37,7 +114,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('order.show',['order'=>$order]);
     }
 
     /**
@@ -63,4 +140,22 @@ class OrderController extends Controller
     {
         //
     }
+
+
+   /* public function order(Order $order){
+
+        $copy= Copy::all();
+        $film= Film::all();
+        $member=Member::all();
+
+
+        return view('order.order',[
+            'copy' => $copy,
+            'order'=>$order,
+            'film'=>$film,
+            'member'=>$member
+        
+        ]);
+
+    }*/
 }

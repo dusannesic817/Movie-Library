@@ -18,7 +18,7 @@ class CopyController extends Controller
         $data = Copy::leftJoin('films', 'copies.film_id', '=', 'films.id')
         ->select('copies.*')
         ->orderBy('films.name')
-        ->paginate(5);
+        ->paginate(5); 
     
         return view('copy.index', ['copy'=>$data]);
       

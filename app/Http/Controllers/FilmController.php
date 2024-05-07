@@ -96,9 +96,12 @@ class FilmController extends Controller
 
         )->paginate(5);
 
+    
+
         $populateData= $request->all();
         $genres=Genre::all();
         $people= Person::all();
+        
 
         return view('film.index',
         [
@@ -195,6 +198,7 @@ class FilmController extends Controller
 
         $genres= Genre::all()->sortBy('name');
         $people= Person::all();
+        
 
         return view('film.edit', [
             'film'=>$film,

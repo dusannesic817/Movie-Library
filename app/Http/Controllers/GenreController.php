@@ -74,8 +74,6 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-       
-
         // Prosleđivanje promenljive $genre u predložak
         return view('genre.edit', ['genre' => $genre]);
     }

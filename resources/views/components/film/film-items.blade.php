@@ -6,7 +6,7 @@
     
         <p class="m-0"><strong>{{ __('Directors')}}:</strong>
         @foreach($film->directors as $p)
-            {{  $p->full_name}}
+            {{ $p->full_name}}
         @endforeach	
         </p>
 
@@ -26,6 +26,7 @@
         </div>
 
     </td>
+
     <td>{{ $film->running_time }}</td>
     <td>{{ $film->year }}</td>
     <td>{{ $film->rating }}</td>

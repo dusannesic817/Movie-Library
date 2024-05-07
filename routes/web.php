@@ -50,10 +50,13 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::resource('person', PersonController::class);
     Route::resource('member', MemberController::class);
     Route::resource('copy', CopyController::class);
-    Route::resource('order', OrderController::class);
+    Route::resource('order', OrderController::class)->except(['create']);;
+    Route::get('order/{copy}/create', [OrderController::class, 'create'])->name('order.create');
+
 
 
     /*
+    Route::get(/order/{order},[OrderController::class, show])->name('order.show');
     Route::get(/order/create, [OrderController::class, create])->name('order.create');
     Route::post(/order, [OrderController::class, store])->name('order.store');
     */ 
