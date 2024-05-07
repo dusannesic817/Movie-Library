@@ -22,18 +22,37 @@ class OrderController extends Controller
      
       // $orders = Order::with('member','copy')->toSql();
       
-        $orders=Order::all();
-        dd($orders);
-        exit();
+       $orders=Order::all();
+       // $films=$orders->pluck('copy.film.name')->unique();
+
+        /*dd($films);
+        exit();*/
         $member=Member::all();
-        $copy=Copy::all();
+        $copies=Copy::all();
+   
+
 
         return view('order.index', [
-            "orders"=>$orders,
+           
             'member'=>$member,
-            'copy'=>$copy
+           
+            'copies'=>$copies,
+            'orders'=>$orders
         ]);
         
+    }
+
+
+    public function list(Copy $copy){
+
+        $order=Order::all();
+        //$copy=Copy::all();
+    
+        return view('order.list',
+        ['list'=>$copy,
+        'order'=>$order
+    ]);
+      
     }
 
     /**

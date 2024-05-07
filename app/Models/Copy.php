@@ -16,15 +16,15 @@ class Copy extends Model
     protected $fillable=['status','amount','price'];
 
      public function member(){
-        return $this->belongsToMany(Member::class,'orders');
+        return $this->belongsToMany(Member::class,'orders')
+            ->withPivot('status', 'created_at', 'to_date'); // Dodajte nazive dodatnih atributa
+        ;
      }
 
      public function film():BelongsTo{
         return $this->belongsTo(Film::class);
     }
 
-    /* public function orders() {
-        return $this->belongsToMany(Order::class);
-    }*/
+
      
 }

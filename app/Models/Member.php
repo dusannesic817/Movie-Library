@@ -24,7 +24,8 @@ class Member extends Model
 
 
     public function copy(){
-        return $this->belongsToMany(Copy::class, 'orders');
+        return $this->belongsToMany(Copy::class, 'orders')
+                    ->withPivot('status', 'created_at', 'to_date'); // Dodajte nazive dodatnih atributa;
      }
 
     /* public function orders() {

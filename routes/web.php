@@ -50,8 +50,9 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::resource('person', PersonController::class);
     Route::resource('member', MemberController::class);
     Route::resource('copy', CopyController::class);
-    Route::resource('order', OrderController::class)->except(['create']);;
+    Route::resource('order', OrderController::class)->except(['create']);
     Route::get('order/{copy}/create', [OrderController::class, 'create'])->name('order.create');
+    Route::get('order/{copy}/list', [OrderController::class, 'list'])->name('order.list');
 
 
 

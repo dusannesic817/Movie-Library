@@ -7,14 +7,25 @@
                 <tr>
                     <th>Order ID</th>
                     <th>Member Name</th>
-                    <!-- Ostala zaglavlja kolona -->
+                    <th>Movie Name</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($orders as $order)
-                    @foreach ($order->member as $value)
-                            <p>{{$value->name}}</p>
-                    @endforeach
+                @foreach ($copies as $copy)
+                <tr>
+                    <td> <a href="{{route('order.list',$copy)}}">{{$copy->film->name}}</a></td>
+                    <td>
+                        @foreach ($copy->member as $order)
+                        dd({{$order}})
+                        
+                    
+                        @endforeach
+                    </td>
+                  
+                    
+                       
+                </tr>
                 @endforeach
             </tbody>
         </table>
