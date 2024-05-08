@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,5 +33,11 @@ class Member extends Model
         return $this->belongsToMany(Order::class);
     }*/
      
+    public function rest_days(Carbon $to_date){
+
+        $currentDate = Carbon::now();
+        
+        return ceil($currentDate->diffInDays($to_date));
+    }
 
 }

@@ -22,7 +22,7 @@
                                   </tr>
                                   <tr>
                                     <th>Status</th>
-                                    <td>{{$copy->statuus}}</td>
+                                    <td>{{$copy->status}}</td>
                                   </tr>
                                   <tr>
                                     <th>Available amount</th>

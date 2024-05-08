@@ -15,42 +15,28 @@ class OrderController extends Controller
      */
     public function index()
     {
-      /*  $orders = Order::leftJoin('members', 'orders.member_id', '=', 'members.id')
-                    ->leftJoin('copies', 'orders.copy_id', '=', 'copies.id')
-                    ->select('orders.*', 'members.*', 'copies.*')
-                    ->get();*/
-     
-      // $orders = Order::with('member','copy')->toSql();
       
-       $orders=Order::all();
-       // $films=$orders->pluck('copy.film.name')->unique();
-
-        /*dd($films);
-        exit();*/
-        $member=Member::all();
-        $copies=Copy::all();
-   
-
+      //  $member=Member::all();
+        $copies = Copy::leftJoin('films', 'copies.film_id', '=', 'films.id')
+        ->select('copies.*')
+        ->orderBy('films.name')
+        ->paginate(5); 
 
         return view('order.index', [
-           
-            'member'=>$member,
-           
+          //  'member'=>$member,
             'copies'=>$copies,
-            'orders'=>$orders
+           // 'orders'=>$orders
         ]);
         
     }
 
 
     public function list(Copy $copy){
-
-        $order=Order::all();
-        //$copy=Copy::all();
     
         return view('order.list',
         ['list'=>$copy,
-        'order'=>$order
+     
+       
     ]);
       
     }
@@ -160,21 +146,4 @@ class OrderController extends Controller
         //
     }
 
-
-   /* public function order(Order $order){
-
-        $copy= Copy::all();
-        $film= Film::all();
-        $member=Member::all();
-
-
-        return view('order.order',[
-            'copy' => $copy,
-            'order'=>$order,
-            'film'=>$film,
-            'member'=>$member
-        
-        ]);
-
-    }*/
 }

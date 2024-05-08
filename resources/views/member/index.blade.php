@@ -34,7 +34,7 @@
                       @foreach ($member as $value)   
                     <tr>
                        <td>{{ ($member->currentPage()-1) * $member->perPage() + $loop->iteration }}</td>
-                      <td>{{$value->fullName}}</td>
+                      <td><a href="{{route('member.show',[$value->id])}}">{{$value->fullName}}</a></td>
                       <td>{{$value->id_number}}</td>
                       <td>
                        
