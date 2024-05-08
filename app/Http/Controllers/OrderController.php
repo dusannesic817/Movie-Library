@@ -16,7 +16,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with('copy.film','member')->get();
-        $uniqueCopies = $orders->unique('copy_id')->pluck('copy');
+        $uniqueCopies = $orders->unique('copy_id')->pluck('copy'); // ovde sam ucitao sve iz order prvo, pa onda zatrazio sve jedinstvene copy_id iz order tabele, onda pluck() vraca sve podatke nekog objekta, u mom slucaju sam zatrazio sve podate iz tabele copies za jednistven copy_id koji sam izvukao iz orders
 
         //$copyMemberCounts = $orders->groupBy('copy_id')->map->groupBy('member_id')->map->count();
         $uniqueCopies = $uniqueCopies->sortBy('film.name');
