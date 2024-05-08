@@ -19,30 +19,23 @@
                       <th scope="col">{{ __('No') }}</th>
                       <th scope="col">{{ __('Name') }}</th>
                       <th scope="col">{{ __('Code') }}</th>
-                   
+                    
                     </tr>
                   </thead>
                   <tbody>
-                      @foreach ($copies as $copy)   
+                    
+                    @foreach ($uniqueCopy as $order)
+                   
                     <tr>
-                        <td>{{($copies->currentPage()-1) * $copies->perPage() + $loop->iteration }}</td>
-                        <td><a href="{{route('order.list',$copy)}}">{{$copy->film->name}}</a></td>
-                        <td>{{$copy->code}}</td>
-                        <td>
-                       
-                    {{--    <form method="POST" action="{{route('member.destroy', [$value->id])}}">
-                          @method("DELETE")
-                          @csrf
-                          <div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="{{ route('member.edit', [$value->id])}}" class="btn btn-success"> {{ __('Edit') }}</a>
-                            <button type="submit" class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
-                          </div>
-                        </form>--}} 
-                      </td>
-                    </tr>
+                    <td>{{$order->id}}</td>
+                    <td><a href="{{route('order.list', [$order->id])}}">{{$order->film->name}}</a></td>
+                    <td>{{$order->code}}</td>
+                  
+                   
+                    </tr>        
                     @endforeach
                   </tbody>
-              
+                
               </table>
                {{$copies->links()}} 
             </div>

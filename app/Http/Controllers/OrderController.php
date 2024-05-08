@@ -15,17 +15,19 @@ class OrderController extends Controller
      */
     public function index()
     {
-      
-      //  $member=Member::all();
-        $copies = Copy::leftJoin('films', 'copies.film_id', '=', 'films.id')
-        ->select('copies.*')
-        ->orderBy('films.name')
-        ->paginate(5); 
+        $orders = Order::with('copy.film','member')->get();
+        $uniqueCopies = $orders->unique('copy_id')->pluck('copy');
+
+        //$copyMemberCounts = $orders->groupBy('copy_id')->map->groupBy('member_id')->map->count();
+        $uniqueCopies = $uniqueCopies->sortBy('film.name');
+
 
         return view('order.index', [
-          //  'member'=>$member,
-            'copies'=>$copies,
-           // 'orders'=>$orders
+        
+            'orders'=>$orders,
+            'uniqueCopy'=>$uniqueCopies,
+           // 'copyMemberCounts'=>$copyMemberCounts
+           
         ]);
         
     }
