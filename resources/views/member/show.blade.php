@@ -19,9 +19,11 @@
                           <div class="border-bottom">Payment Information</div>
                           
                           <div class="mt-4">Spent Money</div>
-                          <div>Owe</div>
+                          <div>Owes</div>
                             
-                           <div class="mt-3"><a href="##">Payment Buttons</a></div>
+                           <div class="mt-5" style="text-align:center">
+                            <a  class="btn" href="##" style="background-color: rgba(4,83,124,255); color:white">Payment Buttons</a>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -60,14 +62,26 @@
                                     <td colspan="2">27-May-1995</td>
                                    
                                   </tr>
+                           
                                 </tbody>
                               </table>
-                            <div class="d-flex justify-content-start">
-                              <p>Favorite Genres:</p>
-                              <p>Action</p>
-                              <p>Action</p>
+                              <div class="d-flex pt-2" style="margin-bottom: -10px;">
+                              <p style="margin-left: 10px; font-weight:bold">Favorite Genres:</p>
+                             <ul class="d-flex genre-ul">
                               
+                              <li class="genre-li">
+                                <a class="genre-a" href="#">Action</a>
+                              </li>
+                              <li  class="genre-li">
+                                <a class="genre-a" href="#">Comedia</a>
+                              </li>
+                              <li  class="genre-li">
+                                <a class="genre-a" href="#">Comedia</a>
+                              </li>
+
+                             </ul>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -82,7 +96,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    Owe
+                                    Owes movies
                                 </div>
                             </div>
                         </div>
