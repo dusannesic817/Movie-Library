@@ -20,13 +20,9 @@ class OrderController extends Controller
 
         $orders = Order::with('copy.film','member')->paginate(10);; // ovde copy.film stoji spojeno zato sto sam ucitao, copy tabelu i povezao je sa film jer su spojene, a i member sam pozvao da i iz nje iscitavam podatke ako zelim
         $uniqueCopies = $orders->unique('copy_id')->pluck('copy'); // ovde sam ucitao sve iz order prvo, pa onda zatrazio sve jedinstvene copy_id iz order tabele, onda pluck() vraca sve podatke nekog objekta, u mom slucaju sam zatrazio sve podate iz tabele copies za jednistven copy_id koji sam izvukao iz orders
-
-        //$copyMemberCounts = $orders->groupBy('copy_id')->map->groupBy('member_id')->map->count();
         $uniqueCopies = $uniqueCopies->sortBy('film.name');
 
-       
-
-
+    
         return view('order.index', [
         
             'orders'=>$orders,
@@ -49,9 +45,7 @@ class OrderController extends Controller
       
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create(Copy $copy)
     {
         $member=Member::all();
@@ -135,7 +129,10 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('order.edit',[
+            'order'=>$order,
+           
+        ]);
     }
 
     /**

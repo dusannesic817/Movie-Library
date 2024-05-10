@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Copy;
+use App\Models\Film;
+use App\Models\Order;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -60,7 +63,79 @@ class MemberController extends Controller
    
     public function show(Member $member)
     {
-        return view ('member.show', ['member'=>$member]);
+    
+
+        $lastFive = Order::where('member_id', $member->id)
+        ->with('copy.film')
+        ->latest() 
+        ->take(5) 
+        ->get()
+        ->pluck('copy.film.name')
+        ->unique();
+
+        $owes = Order::where('member_id', $member->id)
+        ->where('status', 1) 
+        ->with('copy.film')
+        ->latest() 
+        ->take(5) 
+        ->get()
+        ->map(function ($order) {
+            return [
+                'order_id' => $order->id,
+                'film_name' => $order->copy->film->name,
+            ];
+        })
+        ->unique();
+
+        $allMovies = Order::where('member_id', $member->id)
+        ->with('copy.film')
+        ->get()
+        ->pluck('copy.film.name')
+        ->unique();
+
+
+        $favoriteGenres = Film::whereIn('name', $allMovies->toArray()) 
+        ->with('genres') 
+        ->get()
+        ->flatMap(function ($film) {
+            return $film->genres->pluck('name_en');
+        });
+
+        $top3_genres = $favoriteGenres->countBy()->sortDesc()->take(3);
+        $favorites = $top3_genres->keys()->toArray();
+
+        $debt = Order::where('member_id', $member->id)
+                    ->where('status', 1)
+                    ->with('copy:id,price')
+                    ->get(['copy_id', 'quantity']);
+
+         
+
+        $totalDebt = $debt->sum(function ($order) {
+            return $order->quantity * $order->copy->price;
+        });
+
+        $spent = Order::where('member_id', $member->id)
+                    ->with('copy:id,price')  // ovde sam pokupio iz copy tabele copy.id i copy.price isto kao kad bih tako gledao u sql
+                    ->get(['copy_id', 'quantity']);  // ovde sta uzimam, uzimam quantity ali da bih uporedio sa stranim kljucem moram i copy_id
+
+         
+
+        $totalSpent = $spent->sum(function ($order) {      //sabira ($order) prdstavlja kroz koju tabelu prolazi gde se nalaze ti podaci sto ih zelim koja je glavna tabela iz koje krecem da dohvatam
+            return $order->quantity * $order->copy->price;
+        });
+
+
+ 
+        return view ('member.show',[
+            'member'=>$member,
+            'lastFive'=>$lastFive,
+            'owes'=>$owes,
+            'favorites'=>$favorites,
+            'totalDebt'=>$totalDebt,
+            'totalSpent'=>$totalSpent
+        
+        ]);
     }
 
     /**

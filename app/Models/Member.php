@@ -40,4 +40,12 @@ class Member extends Model
         return ceil($currentDate->diffInDays($to_date));
     }
 
+
+    protected function date(): Attribute{       
+        $date = Carbon::parse($this->b_date)->format('M-d-Y');
+        return Attribute::make(
+        get: fn () => ($date),
+        );
+    }
+
 }
