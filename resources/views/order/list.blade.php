@@ -19,10 +19,10 @@
                         </thead>
                         <tbody>
                             @foreach ($list->member as $m)
-                           {{-- Premestite linkovanje na početak reda --}}
+                       
                                 <tr>
                                         <td>{{$m->id}}</td>                           
-                                        @if ($m->pivot->status == 1)  {{-- Provjera statusa --}}
+                                        @if ($m->pivot->status == 1)
                                             <td>  <a href="{{ route('member.show', [$m->id]) }}">{{ $m->name . ' ' . $m->surname }}</a></td>
                                             <td>{{ $m->city }}</td>
                                             <td>{{ $m->id_number }}</td>
@@ -31,7 +31,6 @@
                                             @endphp
                                             <td>{{ $m->rest_days($to_date) }}</td>
                                         @else
-                                            {{-- Obavijest ako nema imena --}}
                                             <td>{{ 'no name' }}</td>
                                         @endif
                                     

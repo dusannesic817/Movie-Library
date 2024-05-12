@@ -24,11 +24,8 @@ class OrderController extends Controller
 
     
         return view('order.index', [
-        
             'orders'=>$orders,
             'uniqueCopy'=>$uniqueCopies,
-            
-           // 'copyMemberCounts'=>$copyMemberCounts
            
         ]);
         
@@ -39,8 +36,6 @@ class OrderController extends Controller
     
         return view('order.list',
         ['list'=>$copy,
-     
-       
     ]);
       
     }
@@ -48,7 +43,7 @@ class OrderController extends Controller
    
     public function create(Copy $copy)
     {
-        $member=Member::all();
+      
         $film=Film::all();
 
         session(['copy_id' => $copy->id]);

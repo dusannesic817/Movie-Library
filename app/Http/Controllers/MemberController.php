@@ -12,9 +12,7 @@ use Illuminate\Validation\Rule;
 
 class MemberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
 
