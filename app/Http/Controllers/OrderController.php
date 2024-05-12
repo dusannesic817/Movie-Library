@@ -60,7 +60,6 @@ class OrderController extends Controller
     {
         $request->validate([
             'id_number'=>'required|exists:members,id_number|between:12,13',
-            'quantity'=>'required|numeric',
             'created_at'=>'required',
             'to_date'=>'required',
 
@@ -68,20 +67,19 @@ class OrderController extends Controller
 
         $copy_id=session('copy_id');
         $copy = Copy::findOrFail($copy_id);
-        $order_quantity = $request->input('quantity');
+      
        
 
         $id_number = $request->input('id_number');
         $member_id = Member::where('id_number', $id_number)->value('id'); // dobijam samo taj jeda id, ne kolekciju kao sa get
       
-        if($order_quantity <= $copy->amount && $copy->amount > 0 && $copy->status=="Available"){
+        if($copy->amount > 0 && $copy->status=="Available"){
             
-            $copy->update(['amount'=>$copy->amount - $order_quantity]);
+            $copy->update(['amount'=>$copy->amount - 1]);
 
             Order::create([
                 'copy_id' => $copy_id,
                 'member_id' => $member_id,
-                'quantity' => $request->input('quantity'),
                 'created_at' => $request->input('created_at'),
                 'to_date' => $request->input('to_date'),
             ]);
@@ -97,7 +95,7 @@ class OrderController extends Controller
 
         $alertMsg='';
 
-            if($order_quantity > $copy->amount && $copy->amount <= 0 ){
+            if($copy->amount <= 0 ){
                 $alertMsg="Unavailable amount";
             }elseif($copy->status !="Available"){
                 $alertMsg="Film is unavailable";
@@ -124,8 +122,14 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
+
+    
+
+           
+
         return view('order.edit',[
             'order'=>$order,
+            
            
         ]);
     }
@@ -135,7 +139,23 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+
+        $request->validate([
+            'status'=>'required'
+        ]);
+
+        $order->update($request->all());
+
+        $copy = Copy::findOrFail($order->copy_id);
+
+        if($order){
+            $copy->update(['amount'=>$copy->amount + 1]);
+        }
+        
+        return redirect()->route('member.show', ['member' => $order->member_id]);
+
+       
+
     }
 
     /**

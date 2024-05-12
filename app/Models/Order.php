@@ -12,7 +12,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable=['copy_id','member_id','quantity','created_at','to_date'];
+    protected $fillable=['copy_id','member_id','status','created_at','to_date'];
 
 
    public function copy() {

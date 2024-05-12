@@ -29,19 +29,6 @@
                                 </span>
                                 @enderror
                             </div>
-                            <div class="mb-3">
-                                <label for="quantity" class="form-label">{{ __("Quantity") }}</label>
-                                <input type="number" class="form-control  @error('quantity') is-invalid @enderror"
-                                id="quantity"
-                                name="quantity"
-                                value="{{old('quantity')}}"
-                                />
-                                @error('quantity')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{$message}}</strong>
-                                </span>
-                                @enderror
-                            </div>
                             <div class="mb-3 mt-3">
                                 <label for="created_at" class="form-label">{{ __("Created at") }}</label>
                                 <input type="date" class="form-control  @error('created_at') is-invalid @enderror" 

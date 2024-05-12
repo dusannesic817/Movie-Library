@@ -102,26 +102,25 @@ class MemberController extends Controller
         $top3_genres = $favoriteGenres->countBy()->sortDesc()->take(3);
         $favorites = $top3_genres->keys()->toArray();
 
-        $debt = Order::where('member_id', $member->id)
-                    ->where('status', 1)
-                    ->with('copy:id,price')
-                    ->get(['copy_id', 'quantity']);
-
-         
-
-        $totalDebt = $debt->sum(function ($order) {
-            return $order->quantity * $order->copy->price;
+        $totalDebt = Order::where('member_id', $member->id)
+        ->where('status', 1)
+        ->with('copy:id,price')
+        ->get()
+        ->sum(function ($order) {
+            return $order->copy->price;
         });
 
-        $spent = Order::where('member_id', $member->id)
+
+        $totalSpent = Order::where('member_id', $member->id)
                     ->with('copy:id,price')  // ovde sam pokupio iz copy tabele copy.id i copy.price isto kao kad bih tako gledao u sql
-                    ->get(['copy_id', 'quantity']);  // ovde sta uzimam, uzimam quantity ali da bih uporedio sa stranim kljucem moram i copy_id
-
+                    ->get()  // ovde sta uzimam, uzimam quantity ali da bih uporedio sa stranim kljucem moram i copy_id
+                    ->sum(function ($order){  //sabira ($order) prdstavlja kroz koju tabelu prolazi gde se nalaze ti podaci sto ih zelim koja je glavna tabela iz koje krecem da dohvatam
+                        return $order->copy->price;
+                    });
          
 
-        $totalSpent = $spent->sum(function ($order) {      //sabira ($order) prdstavlja kroz koju tabelu prolazi gde se nalaze ti podaci sto ih zelim koja je glavna tabela iz koje krecem da dohvatam
-            return $order->quantity * $order->copy->price;
-        });
+      
+          
 
 
  

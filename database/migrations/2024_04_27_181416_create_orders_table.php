@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('copy_id');
             $table->unsignedBigInteger('member_id');
-            $table->integer('quantity');
             $table->timestamps();
             $table->date("to_date")->nullable(false);
 
