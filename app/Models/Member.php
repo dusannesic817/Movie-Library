@@ -29,14 +29,14 @@ class Member extends Model
                     ->withPivot('status', 'created_at', 'to_date'); // Dodajte nazive dodatnih atributa;
      }
 
-    /* public function orders() {
-        return $this->belongsToMany(Order::class);
-    }*/
+     public function payment(){
+        return $this->hasMany(Payment::class);
+     }
+     
      
     public function rest_days(Carbon $to_date){
 
         $currentDate = Carbon::now();
-        
         return ceil($currentDate->diffInDays($to_date));
     }
 

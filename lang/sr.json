@@ -37,7 +37,24 @@
     "Birth": "Datum Rodjenja",
     "No":"Broj",
     "People" :"Ljudi",
-    "Date": "Datum Rodjenja"
+    "Date": "Datum Rodjenja",
+    "Payment Information" : "Stanje Racuna",
+    "Total Spent Money" : "Ukupno potroseno para",
+    "Debt": "Dug",
+    "Payment" : "Uplata",
+    "Number" : "Broj",
+    "Favorite Genres" : "Omiljeni Zanrovi",
+    "Owes": "Duguje",
+    "Last 5 Films" : "Poslednjih 5 filma",
+    "Amount" : "Kolicina",
+    "Price" : "Cena",
+    "Code" : "Kod",
+    "Available Amount" : "Dostupna Kolicina",
+    "Available" : "Dostupno",
+    "Unavailable" : "Nedostupno",
+    "Expire": "Preostalo Dana",
+    "Member ID": "Clan ID"
+
     
     
 

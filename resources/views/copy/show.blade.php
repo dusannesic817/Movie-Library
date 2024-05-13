@@ -17,15 +17,15 @@
                             <table class="table">
                                 <tbody>
                                   <tr>
-                                    <th>Price</th>
+                                    <th>{{ __('Price') }}</th>
                                     <td>{{$copy->price}}$</td>
                                   </tr>
                                   <tr>
-                                    <th>Status</th>
-                                    <td>{{$copy->status}}</td>
+                                    <th>{{ __('Status') }}</th>
+                                    <td>{{__($copy->status)}}</td>
                                   </tr>
                                   <tr>
-                                    <th>Available amount</th>
+                                    <th>{{ __('Available Amount') }}</th>
                                     <td>{{$copy->amount}}</td>
                                   </tr>
                                 </tbody>

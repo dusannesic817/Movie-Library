@@ -7,6 +7,7 @@ use App\Models\Copy;
 use App\Models\Film;
 use App\Models\Order;
 use App\Models\Member;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -26,6 +27,7 @@ class MemberController extends Controller
     public function create()
     {
         return view ('member.create');
+       
     }
 
     public function store(Request $request)
@@ -61,8 +63,8 @@ class MemberController extends Controller
    
     public function show(Member $member)
     {
+        session(['member_id'=>$member->id]);
     
-
         $lastFive = Order::where('member_id', $member->id)
         ->with('copy.film')
         ->latest() 
@@ -102,14 +104,12 @@ class MemberController extends Controller
         $top3_genres = $favoriteGenres->countBy()->sortDesc()->take(3);
         $favorites = $top3_genres->keys()->toArray();
 
-        $totalDebt = Order::where('member_id', $member->id)
-        ->where('status', 1)
-        ->with('copy:id,price')
-        ->get()
-        ->sum(function ($order) {
-            return $order->copy->price;
-        });
+        $amount=Payment::where('member_id', $member->id)
+                        ->pluck('amount')
+                        ->sum();
+                      
 
+        $totalDebt= $this->totalDebt($member->id,$amount);
 
         $totalSpent = Order::where('member_id', $member->id)
                     ->with('copy:id,price')  // ovde sam pokupio iz copy tabele copy.id i copy.price isto kao kad bih tako gledao u sql
@@ -118,12 +118,6 @@ class MemberController extends Controller
                         return $order->copy->price;
                     });
          
-
-      
-          
-
-
- 
         return view ('member.show',[
             'member'=>$member,
             'lastFive'=>$lastFive,
@@ -135,17 +129,18 @@ class MemberController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+  
     public function edit(Member $member)
     {
         return view ('member.edit', ['member'=>$member]);
+      
     }
 
 
     public function update(Request $request, Member $member)
     {
+
+      
         
         $request->validate([
             'name'=>'required',
@@ -176,6 +171,8 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
 
+       
+
         $member->delete();
 
         session()->flash('alertType','success');
@@ -184,6 +181,41 @@ class MemberController extends Controller
         return redirect()->route('member.index');
 
     }
+
+
+  /*  public function totalDebt($member_id){
+        $order = Order::where('member_id', $member_id)
+        ->with('copy') 
+        ->get();
+    
+        $data = $order->map(function ($order) {
+        return [
+            'to_date' => $order->to_date,
+            'price' => $order->copy->price,
+           
+        ];
+    });
+
+    $currentDate = Carbon::now();
+    $sum=0;
+    foreach($data as $value){
+
+       $to_date= $value['to_date'];
+        $parse= ceil($currentDate->diffInDays($to_date));
+        $priceArray=[];
+        if($parse<0){
+            $priceArray[]= abs($parse)*1.2 + $value['price'];
+        }else{
+            $sum+=$value['price'];
+        }
+    
+        foreach($priceArray as $value){
+            $sum+=$value;
+        }
+
+    }
+    return $sum;
+    }*/
 
 
 

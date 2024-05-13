@@ -52,7 +52,7 @@
                   </tbody>
               
               </table>
-             {{--  {{ $member->links() }} --}}
+               {{ $member->links() }}
 
               </div>
           </div>

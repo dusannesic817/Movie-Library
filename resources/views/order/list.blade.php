@@ -44,7 +44,5 @@
                 </div>
             </div>
         </div>
-        @foreach ($list->member as $m)
-        @endforeach
     </x-container>
 @endsection

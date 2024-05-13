@@ -20,8 +20,8 @@
                             <div class="mb-3 mt-5">                  
                                     <label for="status" class="form-label">{{ __('Status') }}</label>
                                     <select class="form-select" aria-label="Default select example" name="status">
-                                        <option value="0" {{ $order->status == '0' ? 'selected' : '' }}>Deactivate Order</option>
-                                        <option value="1" {{ $order->status == "1" ? 'selected' : '' }}>Active Order</option>
+                                        <option value="0" {{ $order->status == '0' ? 'selected' : '' }}>{{ __('Deactivate Order') }}</option>
+                                        <option value="1" {{ $order->status == "1" ? 'selected' : '' }}>{{ __('Active Order') }}</option>
                                     </select>
                             </div>
                            

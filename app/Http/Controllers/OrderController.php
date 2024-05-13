@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
+ 
+
     public function index()
     {
   
@@ -109,17 +109,13 @@ class OrderController extends Controller
         return redirect()->route('film.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+  
     public function show(Order $order)
     {
         return view('order.show',['order'=>$order]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Order $order)
     {
 
@@ -165,5 +161,8 @@ class OrderController extends Controller
     {
         //
     }
+
+
+
 
 }

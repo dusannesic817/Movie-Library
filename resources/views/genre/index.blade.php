@@ -7,15 +7,10 @@
 <div class="container">
   <div class="row justify-content-center">
       <div class="col-md-8">
-
-
-    
           <x-message 
           type="{{session('alertType')}}"
           message=" {{ __(session('alertMsg')) }}"
-          />
-
-      
+          />    
         <div class="row mb-3">
             <a href="/genre/create" class="btn btn-primary">
                 {{ __('Create') }}

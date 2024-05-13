@@ -8,11 +8,11 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">No</th>
-                <th scope="col">Name</th>
-                <th scope="col">Code</th>
-                <th scope="col">Status</th>
-                <th scope="col">Edit</th>
+                <th scope="col">{{ __('No') }}</th>
+                <th scope="col">{{ __('Name') }}</th>
+                <th scope="col">{{ __('Code') }}</th>
+                <th scope="col">{{ __('Status') }}</th>
+                <th scope="col">{{ __('Edit') }}</th>
               </tr>
             </thead>
             <tbody>

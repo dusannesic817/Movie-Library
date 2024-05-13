@@ -10,6 +10,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 
 
@@ -53,7 +54,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::resource('order', OrderController::class)->except(['create']);
     Route::get('order/{copy}/create', [OrderController::class, 'create'])->name('order.create');
     Route::get('order/{copy}/list', [OrderController::class, 'list'])->name('order.list');
-
+    Route::resource('payment', PaymentController::class);
 
 
     /*
@@ -75,8 +76,6 @@ Route::get('/lang/{locale}', function (string $locale){
     if(isset($locale)){
         app()->setLocale($locale);
     }
-   // App::setLocale($locale);
-
     session(['locale' => $locale]);
 
     return redirect()->back();
