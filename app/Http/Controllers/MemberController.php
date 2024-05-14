@@ -183,40 +183,6 @@ class MemberController extends Controller
     }
 
 
-  /*  public function totalDebt($member_id){
-        $order = Order::where('member_id', $member_id)
-        ->with('copy') 
-        ->get();
-    
-        $data = $order->map(function ($order) {
-        return [
-            'to_date' => $order->to_date,
-            'price' => $order->copy->price,
-           
-        ];
-    });
-
-    $currentDate = Carbon::now();
-    $sum=0;
-    foreach($data as $value){
-
-       $to_date= $value['to_date'];
-        $parse= ceil($currentDate->diffInDays($to_date));
-        $priceArray=[];
-        if($parse<0){
-            $priceArray[]= abs($parse)*1.2 + $value['price'];
-        }else{
-            $sum+=$value['price'];
-        }
-    
-        foreach($priceArray as $value){
-            $sum+=$value;
-        }
-
-    }
-    return $sum;
-    }*/
-
 
 
 }
