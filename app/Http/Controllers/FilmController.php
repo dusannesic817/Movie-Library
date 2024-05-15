@@ -96,8 +96,7 @@ class FilmController extends Controller
 
         )->paginate(5);
 
-    
-
+       
         $populateData= $request->all();
         $genres=Genre::all();
         $people= Person::all();
