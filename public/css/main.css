@@ -169,3 +169,48 @@ a.sidebar-link:hover {
     transform: rotate(45deg);
     transition: all .2s ease-out;
 }
+
+.card-icon {
+    font-size: 32px;
+    line-height: 0;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  .sales-card .card-icon {
+    color: #4154f1;
+    background: #f6f6fe;
+  }
+  .revenue-card .card-icon {
+    color: #2eca6a;
+    background: #e0f8e9;
+  }
+
+  .customers-card .card-icon {
+    color: #ff771d;
+    background: #ffecdf;
+  }
+
+  .card-title {
+   
+    font-size: 18px;
+    font-weight: 500;
+    color: #012970;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .card-title span {
+  color: #899bbd;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.info-card h6 {
+    font-size: 28px;
+    color: #012970;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }

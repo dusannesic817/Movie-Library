@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
+
 @section('content')
+<x-search route="film.index"/>
+
+<x-filters :genres="$genres" :people="$people" :populateData="$populateData" />
+
     <div class="container mt-5">
         <div class="row">
-            <x-message type="{{ session('alertType') }}" message="{{ __(session('alertMsg')) }}" />
+            <x-message type="{{ session('alertType') }}" 
+            message="{{ __(session('alertMsg')) }}" />
             @foreach ($datas as $film)
             <div class="col-12 mb-4">
             <div class="card mb-3">

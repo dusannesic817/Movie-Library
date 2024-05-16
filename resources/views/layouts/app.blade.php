@@ -95,7 +95,7 @@
 @include('partials.sidebar')
 
         <main class="py-4 main p-3">
-            @include("partials.search")
+        
             @yield('content')
         </main>
     </div>
