@@ -55,21 +55,8 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('order/{copy}/create', [OrderController::class, 'create'])->name('order.create');
     Route::get('order/{copy}/list', [OrderController::class, 'list'])->name('order.list');
     Route::resource('payment', PaymentController::class);
-
-
-    /*
-    Route::get(/order/{order},[OrderController::class, show])->name('order.show');
-    Route::get(/order/create, [OrderController::class, create])->name('order.create');
-    Route::post(/order, [OrderController::class, store])->name('order.store');
-    */ 
-
-    /*
-    Route::resource('/copy/create', [CopyController::class, 'create']->name('copy/create');
-    */ 
-   
-
 });
-//Route::resource('film', FilmController::class)->middleware(['auth','admin']);
+
 
 
 Route::get('/lang/{locale}', function (string $locale){

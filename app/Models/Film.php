@@ -74,9 +74,13 @@ class Film extends Model
       
             if ($filters['genre'] ?? false) {
                $query->whereHas('genres', function ($query){
-                   $query->where('id', request('genre'));
+                   $query->where('id', request('genre'))
+                   ->orWhere('name_en', 'like', '%' . request('genre') . '%')
+                   ->orWhere('name_sr', 'like', '%' . request('genre') . '%');
                });
            }
+
+
       
            if ($filters['star'] ?? false) {
            $query->whereHas('stars', function($query) {

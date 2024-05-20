@@ -15,86 +15,12 @@ class FilmController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request )
+    public function index(Request $request)
     {
-
-      /*  if($request->isMethod('post')){    //stavio sam u post zbog forme i post rute pa tu se vrsi filtracija
-
-           $rule=[
-                'rating' => 'nullable|integer|between:1,10',
-                'year_from' => 'nullable|date_format:Y|before_or_equal:today',
-                'year_to' => 'nullable|date_format:Y|before_or_equal:today',
-                'time_from' => 'nullable|integer|min:1',
-                'time_to' => 'nullable|integer|min:1'
-            ];
-    
-            if($request->year_from && $request->year_to){
-                $rule['year_to'].='|gte:year_from';
-            }
-            
-            if($request->time_from && $request->time_to){
-                $rule['time_to'].='|gte:time_from';
-            }
-
-            $request->validate($rule); */
-
-
-           // $rating= $request->rating;  // pokupio sam name="rating" iz inputa
-           
-    
-
-           /* $datas= Film::when($rating, function($query) use ($rating){   //ovo when bi menjalo if, npr if($rating){pa uslov} ako ne vrati $datas::Film->all() znaci proverava da li smo popunili formu za rating
-                $query->where('rating','>=', $rating);
-            })
-            ->when($yearFrom, function($query) use ($yearFrom){
-                $query->where('year', '>=', $yearFrom);
-            })
-            ->when($yearTo, function($query) use ($yearTo){
-                $query->where('year', '<=', $yearTo);
-            })
-
-            ->when($timeFrom, function($query) use ($timeFrom){
-                $query->where('running_h', '>=', $timeFrom);
-            })
-
-            ->when($timeTo, function ($query) use ($timeTo) {
-                $query->where(function ($query) use ($timeTo) {
-                    $query->where('running_h', '<', $timeTo)
-                        ->orWhere(function ($query) use ($timeTo) {
-                            $query->where('running_h', '=', $timeTo)
-                            ->whereNull('running_m');
-                        });
-                });
-                //select * from films where running_h<GORNJE_GRANICE ili (running_h=GORNJE_GRANICE and running_m is null)
-            })
-            ->when($name, function ($query) use ($name){
-                $query->where('name' ,'like',  "%".$name."%");
-            })
-
-           ->when($genre, function ($query) use ($genre){
-                $query->whereHas('genres', function($query) use($genre){
-                    $query->where('id', $genre);
-                });
-            })
-
-            ->when($star, function ($query) use ($star){
-                $query->whereHas('stars', function($query) use($star){
-                    $query->where('id', $star);
-                });
-            })
-
-            ->get();*/
-          /*  
-        }else{
-          
-            $datas= Film::orderBy('name')->paginate(5);
-            $populateData=[];
-        }*/
 
         $datas=Film::latest()->filter(
             request(['search','rating','year_from', 'year_to','genre','star'])
-
-        )->paginate(5);
+            )->paginate(5);
 
        
         $populateData= $request->all();

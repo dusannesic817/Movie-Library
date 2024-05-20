@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
 use App\Models\User;
+use App\Models\Genre;
+use App\Models\Order;
+use App\Models\Member;
+use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +29,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
 
         if(Auth::id()){
@@ -35,13 +40,51 @@ class HomeController extends Controller
                 return view('home');
 
             }elseif($usertype=="admin"){
+                
+                //mogao bih da izlistam 10 najpopularnijih filmova umesto sve
+                
 
-                return view('admin.index');
+                $sales=Order::count();
+                $orders = Order::all();
+
+                $data=$orders->map(function ($orders){
+                    return [
+                        'copy_id' => $orders->copy_id,
+                        'price' => $orders->copy->price,
+                       
+                    ];
+                });
+               
+                $sum=0;
+
+                foreach($data as $value){
+                    $sum+=$value['price'];
+                  
+                }
+
+               
+                $member=Member::count();
+                $datas=Film::latest()->get();
+                $populateData= $request->all();
+                $genres=Genre::all();
+                $people= Person::all();
+                return view('admin.index' ,  [
+                    'datas'=>$datas,
+                    'populateData'=> $populateData,
+                    'genres'=> $genres,
+                    'people'=>$people,
+                    'member'=>$member,
+                    'sales'=>$sales,
+                    'sum'=>$sum
+                    
+                ]);
             }else{
                 return redirect()->back();
             }
             
         }
+
+       
 
     }
 }

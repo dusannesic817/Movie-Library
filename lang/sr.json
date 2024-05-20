@@ -53,7 +53,19 @@
     "Available" : "Dostupno",
     "Unavailable" : "Nedostupno",
     "Expire": "Preostalo Dana",
-    "Member ID": "Clan ID"
+    "Member ID": "Clan ID",
+    "List of Copies": "Lista Kopija",
+    "All Genres" : "Svi Zanrovi",
+    "Create Genre" : "Dodaj Zanr",
+    "Create an Order" : "Napravi porudzbinu",
+    "List of Orders" : "Lista Porudzbina",
+    "All Members" : "Lista Clanova",
+    "All Films" : "Lista Filmova",
+    "List of Person" : "Lista Osoba",
+    "Revenue" : "Ukupna Zarada",
+    "Sales" : "Ukupna Prodaja",
+    "Members" : "Ukupno Clanova"
+    
 
     
     

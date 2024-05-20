@@ -2,6 +2,8 @@
 
 
 @section('content')
+<x-name-route :name="Route::currentRouteName()" />
+<x-search route="member.index"/>
 <x-container>
         
           <x-message 
@@ -16,8 +18,6 @@
         </div>
           <div class="card">
               <div class="card-header">{{ __('Member') }}</div>
-             
-
               <div class="card-body">
 
                 <table class="table">

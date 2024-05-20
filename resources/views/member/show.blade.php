@@ -2,10 +2,9 @@
 
 
 @section('content')
+<x-name-route :name="Route::currentRouteName()" />
     <x-container>
-
-       
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body text-center">
@@ -71,7 +70,7 @@
                              <ul class="d-flex genre-ul">
                               @foreach ($favorites as $favorite)
                               <li class="genre-li">
-                                <a class="genre-a" href="#">{{$favorite}}</a>
+                                <a class="genre-a" href="{{route('film.index', ['genre' => $favorite])}}">{{$favorite}}</a>
                               </li>
                               @endforeach
                              </ul>

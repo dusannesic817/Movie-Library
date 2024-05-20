@@ -4,7 +4,6 @@
 @section('content')
 
     <x-container>
-
         <table class="table">
             <thead>
               <tr>

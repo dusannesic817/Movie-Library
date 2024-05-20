@@ -45,7 +45,7 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ route('film.create') }}" class="sidebar-link">
-                            {{ __('Create Film') }}</a>
+                            {{ __('Add') . " " . __('Film') }}</a>
                     </li>
                 </ul>
             </li>
@@ -61,7 +61,7 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ route('member.create') }}" class="sidebar-link">
-                            {{ __('Create Member') }}</a>
+                            {{ __('Add') . " " . __('Member') }}</a>
                     </li>
                 </ul>
             </li>
@@ -91,18 +91,18 @@
                 </a>
                 <ul id="authPerson" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="{{ route('person.index') }}" class="sidebar-link">{{ __('People') }}</a>
+                        <a href="{{ route('person.index') }}" class="sidebar-link">{{ __('List of Person') }}</a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ route('person.create') }}" class="sidebar-link">
-                            {{ __('Create Person') }}</a>
+                            {{ __('Add') . " " . __('Person') }}</a>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-cog"></i>
-                    <span>Setting</span>
+                <a href="{{route('copy.index')}}" class="sidebar-link">
+                    <i class="bi bi-film"></i>
+                    <span>{{ __('List of Copies') }}</span>
                 </a>
             </li>
             <li class="sidebar-item">

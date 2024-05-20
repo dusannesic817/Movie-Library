@@ -15,6 +15,7 @@ class Member extends Model
 
     protected $fillable=['name','surname','id_number','city','address','b_date'];
 
+
     protected function fullName(): Attribute{ 
         
         $fullName = $this->name . " " . $this->surname ;
@@ -48,4 +49,18 @@ class Member extends Model
         );
     }
 
+    public function scopeFilter($query, array $filters){
+        if($filters['search'] ?? false){
+            $search= request('search');
+            $query->where(function($query) use ($search){
+                $query->where('name' , 'like', '%'. request('search'). '%')
+                ->orWhere('surname', 'like', '%' . request('search'). '%')
+                ->orWhere('id_number', 'like', '%' . request('search'). '%')
+                ->orWhereRaw("CONCAT(name, ' ', surname) LIKE ?", ["%$search%"]);
+            });
+            
+         }
+    }
+   
+    
 }

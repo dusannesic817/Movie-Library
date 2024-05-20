@@ -17,7 +17,11 @@ class MemberController extends Controller
     public function index()
     {
 
-        $data=Member::orderBy('name')->paginate(5);
+        $data=Member::orderBy('name')->filter(
+            request(['search'])
+        )
+        
+        ->paginate(5);
         return view('member.index',['member'=> $data]);
     }
 
