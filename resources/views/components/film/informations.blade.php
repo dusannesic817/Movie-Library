@@ -100,7 +100,7 @@
                 <div class="col-md-12">
                     <div class="card" style="background-color: rgba(236, 236, 62, 0.514)">
                         <div class="card-body">
-                          This is some text within a card body. Description
+                        Description
                         </div>
                       </div>
                 </div>
