@@ -15,14 +15,10 @@ use App\Http\Controllers\ProfileController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-/*Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');  *///da mora da bude logovan i da bude verifikovan
-
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -41,11 +37,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/genre/{genre}', [GenreController::class, 'destroy'])
     ->name('genre.destroy');
 
-   // Route::post('/film', [FilmController::class, 'index'])->name('film.index');
+    Route::resource('film', FilmController::class);
+    Route::resource('person', PersonController::class);
+    Route::resource('member', MemberController::class);
+    Route::resource('copy', CopyController::class);
+    Route::resource('order', OrderController::class)->except(['create']);
+    Route::get('order/{copy}/create', [OrderController::class, 'create'])->name('order.create');
+    Route::get('order/{copy}/list', [OrderController::class, 'list'])->name('order.list');
+    Route::resource('payment', PaymentController::class);
     
 
 });
-
+/*
 Route::middleware(['auth', 'admin'])->group(function(){
     Route::resource('film', FilmController::class);
     Route::resource('person', PersonController::class);
@@ -56,7 +59,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('order/{copy}/list', [OrderController::class, 'list'])->name('order.list');
     Route::resource('payment', PaymentController::class);
 });
-
+*/
 
 
 Route::get('/lang/{locale}', function (string $locale){
@@ -77,8 +80,6 @@ Auth::routes([
 ]
 
 //postavio sam rute koje ce biti false jer se ne koriste
-
-
 );
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
